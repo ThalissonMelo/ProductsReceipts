@@ -30,4 +30,11 @@ def create_product(line)
   )
 end
 
-process_file('input.txt')
+File.open('output.txt', 'w') do |file|
+  original_stdout = $stdout
+  $stdout = file
+
+  process_file('input.txt')
+
+  $stdout = original_stdout
+end
