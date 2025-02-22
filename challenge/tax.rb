@@ -1,17 +1,16 @@
 class Tax
+  BASIC_SALES_TAX_RATE = 0.10
+  IMPORT_DUTY_TAX_RATE = 0.05
+
+  attr_reader :tax_price
+
   def initialize(product)
     @product = product
-    @basic_sales_tax = 0.10
-    @import_duty_tax = 0.05
     @tax_price = 0.0
   end
 
   def calculate
-    @tax_price = basic_sales + import_duty + @product.price
-  end
-
-  def tax_price
-    @tax_price
+    @tax_price = (basic_sales + import_duty + @product.price).round(2)
   end
 
   private
@@ -19,14 +18,14 @@ class Tax
   def basic_sales
     return 0 unless @product.is_taxable
 
-    tax = (@product.price * 0.10).ceil(2)
+    tax = (@product.price * BASIC_SALES_TAX_RATE).round(2)
     (tax * 20).ceil / 20.0
   end
 
   def import_duty
     return 0 unless @product.imported
 
-    tax = (@product.price * 0.05).ceil(2)
+    tax = (@product.price * IMPORT_DUTY_TAX_RATE).round(2)
     (tax * 20).ceil / 20.0
   end
 end
