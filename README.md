@@ -1,4 +1,4 @@
-# Challenge Subscribe
+# Products Receipts
 
 This project was made using Ruby version 3.3.4.
 
